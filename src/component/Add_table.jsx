@@ -1,13 +1,14 @@
 import React from "react";
 import axios from 'axios';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {CssBaseline, 
   Grid,
-  FormControl,
-  InputLabel,
-  Input,
-  TextField } from '@material-ui/core';
+  TextField,
+  Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Navbar from "./Navbar.jsx"
+import '../App.css';
 
 const styles = theme => ({
   '@global':{
@@ -24,7 +25,25 @@ const styles = theme => ({
   container:{
       marginTop: "180px",
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
+  },
+  box:{
+    display: "flex",
+    flexDirection: "column",
+      border: "solid 1px #90a4ae",
+      padding: theme.spacing(2, 2)
+  },
+  input:{
+    margin: theme.spacing(1 , 0)
+  },
+  editor:{
+    margin: theme.spacing(1 , 0)
+  },
+  Button:{
+    backgroundColor: theme.palette.primary.dark,
+    color: 'white',
+    fontSize: "1.4rem",
+    marginTop:"20px"
   }
 });
 
@@ -38,7 +57,7 @@ class Add_table extends React.Component {
     }
   };
 
-  _addData = async(e) => {
+  _addTable = async(e) => {
     const { table_title, table_autor,table_text } = this.state;
     e.preventDefault();
 
@@ -75,10 +94,32 @@ class Add_table extends React.Component {
           <CssBaseline />
             <Navbar/>
             <Grid item xs={12} className={this.props.classes.container}>
-            <FormControl>
-                <TextField label="글제목" className={this.props.classes.text}></TextField>
-                <TextField label="글쓴이" className={this.props.classes.text}></TextField>
-            </FormControl>
+                <form className={this.props.classes.box}  onSubmit={this._addTable}>
+                    <TextField label="글제목" variant="outlined" className={this.props.classes.input} onChange={(e) => this._titleUpdate(e)}></TextField>
+                    <TextField label="글쓴이" variant="outlined" className={this.props.classes.input} onChange={(e) => this._autorUpdate(e)}></TextField>
+                    <CKEditor
+                        editor={ ClassicEditor }
+                        onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor is ready to use!', editor );
+                        } }
+                        onChange={(e) => this._textUpdate(e)}
+                        
+                        onChange={ ( event, editor ) => {
+                            const data = editor.getData();
+                            console.log( { event, editor, data } );
+                        } }
+                        onBlur={ ( event, editor ) => {
+                            console.log( 'Blur.', editor );
+                        } }
+                        onFocus={ ( event, editor ) => {
+                            console.log( 'Focus.', editor );
+                        } }
+                    />
+                    <Button type="submit" className={this.props.classes.Button}>
+                        등록
+                    </Button>
+                </form>
             </Grid>
         </React.Fragment>
       )
