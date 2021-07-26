@@ -68,7 +68,10 @@ const styles = theme => ({
     width:"90%",
     borderRadius: "10px",
     overflow: "auto",
-
+  },
+  editButton:{
+      backgroundColor: theme.palette.warning.light,
+      marginRight: '0.1rem'
   }
 });
 
@@ -127,7 +130,7 @@ class Main extends React.Component {
                           <TableCell align="right">{el.table_title}</TableCell>
                           <TableCell align="right">{el.table_autor}</TableCell>
                           <TableCell align="right">{el.table_text}</TableCell>
-                          <TableCell align="right"></TableCell>
+                          <TableCell align="right"><Button className={this.props.classes.editButton}>Edit</Button><Button color="secondary" variant="contained">Delete</Button></TableCell>
                         </TableRow>
                       )
                     })
