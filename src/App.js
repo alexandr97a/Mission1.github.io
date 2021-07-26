@@ -1,24 +1,33 @@
-// import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import Main from "./component/Main.jsx"
+import Add_table from "./component/Add_table.jsx"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      table : [],
+    }
+  };
+
+  
+  render() {
+      return(
+        <>
+          <Router>
+            <Route path='/' exact={true} component={Main} />
+              <Switch>
+                <Route path="/add_table" component={Add_table} />
+              </Switch>
+          </Router>
+        </>
+      )
+  };
+};
+
 
 export default App;
