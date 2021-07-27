@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Mission1.github.io/static/css/main.428d195a.chunk.css",
+    "main.js": "/Mission1.github.io/static/js/main.7658173b.chunk.js",
+    "main.js.map": "/Mission1.github.io/static/js/main.7658173b.chunk.js.map",
+    "runtime-main.js": "/Mission1.github.io/static/js/runtime-main.c800f49d.js",
+    "runtime-main.js.map": "/Mission1.github.io/static/js/runtime-main.c800f49d.js.map",
+    "static/js/2.8c45035b.chunk.js": "/Mission1.github.io/static/js/2.8c45035b.chunk.js",
+    "static/js/2.8c45035b.chunk.js.map": "/Mission1.github.io/static/js/2.8c45035b.chunk.js.map",
+    "static/js/3.bb55cc00.chunk.js": "/Mission1.github.io/static/js/3.bb55cc00.chunk.js",
+    "static/js/3.bb55cc00.chunk.js.map": "/Mission1.github.io/static/js/3.bb55cc00.chunk.js.map",
+    "index.html": "/Mission1.github.io/index.html",
+    "static/css/main.428d195a.chunk.css.map": "/Mission1.github.io/static/css/main.428d195a.chunk.css.map",
+    "static/js/2.8c45035b.chunk.js.LICENSE.txt": "/Mission1.github.io/static/js/2.8c45035b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c800f49d.js",
+    "static/js/2.8c45035b.chunk.js",
+    "static/css/main.428d195a.chunk.css",
+    "static/js/main.7658173b.chunk.js"
+  ]
+}
