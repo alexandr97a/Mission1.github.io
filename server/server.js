@@ -33,12 +33,77 @@ app.post('/add/table', (req, res) => {
         throw err;
     })
 })
-
+//메인 페이지
 app.get('/get/table', (req, res) => {
     Table.findAll()
      .then( result => { res.send(result) })
      .catch( err => { throw err })
  }) 
+
+ app.get('/table/:id',(req,res)=>{
+    // console.log('------------',req);
+
+     Table.findOne({
+         where:{
+             id:req.params.id
+         }
+     })
+     .then( result => { res.send(result) })
+     .catch( err => { throw err })
+ })
+
+ app.post('/delete/table', (req, res) => {
+    Table.destroy({
+        where : { id : req.body.delete.id }
+    })
+    .then( res.sendStatus(200) )
+    .catch( err => { throw err })
+})
+
+// app.post("/save/table_data",(req,res)=>{
+//     Table.update({
+//         table_title: req.body.modify.table_title,
+//         table_autor: req.body.modify.table_autor,
+//         table_text: req.body.modify.table_text
+//     },{
+//         where:{
+//             id: req.body.modify.id
+//         }
+// })
+// .then( result => { res.send(result) })
+// .catch( err => { throw err })
+// })
+
+app.post("/save/table_data",(req,res)=>{
+
+            let data = req.body.modify.table_title;
+            let dbtitle = JSON.stringify(data)
+            let parse = JSON.parse(dbtitle)
+            console.log('1',parse)
+            let tTitle;
+            let tAutor;
+            let tText;
+            tTitle = (parse.table_title);
+            tAutor = (parse.table_autor);
+            tText = (parse.table_text);
+            console.log('2',tTitle)
+            console.log('3',tAutor)
+            console.log('4',tText)
+
+
+
+            Table.update({
+                table_title: tTitle,
+                table_autor: tAutor,
+                table_text: tText
+            },{
+                where:{
+                    id: req.body.modify.id
+                }
+        })
+    .then( result => { res.send(result) })
+    .catch( err => { throw err })
+})
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

@@ -13,7 +13,8 @@ import {CssBaseline,
   Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import CreateIcon from '@material-ui/icons/Create';
-import Navbar from "./Navbar.jsx"
+import Navbar from "./Navbar.jsx";
+import Moment from 'react-moment';
 
 const styles = theme => ({
   '@global':{
@@ -27,33 +28,11 @@ const styles = theme => ({
       listStyle: 'none',
     },
   },
-  AppBar:{
-    backgroundColor: theme.palette.primary.main,
-    boxShadow: 'none',
-    display: 'block'
-  },
-  header:{
-    display: 'flex',
-    alignItems: 'center',
-  },
-  toolbar:{
-    flexWrap: 'nowrap',
-    justifyContent: 'space-between',
-    margin: theme.spacing(0, 15),
-  },
-  Link:{
-    color: 'white',
-    fontSize: 20,
-    margin: theme.spacing(4),
-    '&:hover': {
-      textDecoration: 'none'
-   },
-  },
   addButton:{
     marginTop:"180px",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "5%"
+    marginRight: "20%"
   },
   Button:{
     backgroundColor: theme.palette.primary.dark,
@@ -65,13 +44,21 @@ const styles = theme => ({
     height: "1000px"
   },
   tableCont:{
-    width:"90%",
+    width:"60%",
     borderRadius: "10px",
     overflow: "auto",
   },
   editButton:{
       backgroundColor: theme.palette.warning.light,
-      marginRight: '0.1rem'
+      marginRight: '0.1rem',
+      color:'white'
+  },
+  dltButton:{
+    backgroundColor: theme.palette.secondary.main,
+    color:'white'
+  },
+  tableBody:{
+    cursor: 'pointer'
   }
 });
 
@@ -93,9 +80,29 @@ class Main extends React.Component {
       table : res.data
     })
   }
+
+  _delete = async (el) => {
+    const remove = window.confirm(el.table_title + '을 삭제하시겠습니까?');
+
+    if(remove) {
+      const target = { id : el.id }
+      const res = await axios('/delete/table', {
+        method : 'POST',
+        data : { 'delete' : target },
+        headers: new Headers()
+      })
+      
+      if(res.data) {
+        alert('데이터를 삭제했습니다.')
+        return window.location.reload();
+      }
+    }
+  }
   
   render() {
     const { table } = this.state;
+    
+    console.log('table',table)
       return(
         <React.Fragment>
           <CssBaseline />
@@ -112,30 +119,40 @@ class Main extends React.Component {
                 <Table className={this.props.classes.table} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>번호</TableCell>
-                      <TableCell align="right">제목</TableCell>
-                      <TableCell align="right">글쓴이</TableCell>
-                      <TableCell align="right">등록일</TableCell>
-                      <TableCell align="right">기능</TableCell>
+                      <TableCell align='center'>번호</TableCell>
+                      <TableCell align='left'>제목</TableCell>
+                      <TableCell align='left'>글쓴이</TableCell>
+                      <TableCell align='left'>등록일</TableCell>
+                      <TableCell align='center'>기능</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                   {table.length !== 0 ? 
                     table.map( (el, key) => {
+                      const view_url = 'table/'+el.id;
+                      const link = () =>{
+                        return window.location.href=view_url;
+                      }
+                      // const edit_view_url = 'edit_table/'+el.id;
+                      // const editlink = () =>{
+                      //   return window.location.href=edit_view_url;
+                      // }
+                      // console.log('el',el)
                       return(
-                        <TableRow key={key}>
-                          <TableCell component="th">
-                            {el.table_id}
-                          </TableCell>
-                          <TableCell align="right">{el.table_title}</TableCell>
-                          <TableCell align="right">{el.table_autor}</TableCell>
-                          <TableCell align="right">{el.table_text}</TableCell>
-                          <TableCell align="right"><Button className={this.props.classes.editButton}>Edit</Button><Button color="secondary" variant="contained">Delete</Button></TableCell>
-                        </TableRow>
+                          <TableRow key={key}>
+                            <TableCell  align='center' onClick={link} className={this.props.classes.tableBody}>{el.id}</TableCell>
+                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_title}</TableCell>
+                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_autor}</TableCell>
+                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}><Moment format="YYYY-MM-DD" date={el.createdAt}/></TableCell>
+                            <TableCell  align='center'>
+                              {/* <Button className={this.props.classes.editButton} onClick={editlink}>Edit</Button> */}
+                              <Button className={this.props.classes.dltButton} onClick={() => this._delete(el)}>Delete</Button>
+                            </TableCell>
+                          </TableRow>
+
                       )
                     })
                     : <div>데이터가 없습니다.</div>}
-
                   </TableBody>
                 </Table>
               </TableContainer>

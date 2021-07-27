@@ -23,15 +23,17 @@ const styles = theme => ({
     },
   },
   container:{
-      marginTop: "180px",
+      marginTop: "230px",
       display: "flex",
       justifyContent: "center",
   },
   box:{
     display: "flex",
     flexDirection: "column",
-      border: "solid 1px #90a4ae",
-      padding: theme.spacing(2, 2)
+    border: "solid 1px #90a4ae",
+    borderRadius:'10px',
+    width: "60%",
+    padding: theme.spacing(2, 2)
   },
   input:{
     margin: theme.spacing(1 , 0)
@@ -72,8 +74,8 @@ class Add_table extends React.Component {
     });
 
     if(res.data) {
-      alert('게시판 추가 완료.');
-      return window.location.reload();
+      alert('등록되었습니다.');
+      return window.location.href="/";
     }
   }
   
@@ -83,9 +85,8 @@ class Add_table extends React.Component {
   _autorUpdate(e) {
     this.setState({ table_autor : e.target.value })
   }
-  _textUpdate(e) {
-    this.setState({ table_text : e.target.value })
-  }
+  _textUpdate(data) {
+    this.setState({ table_text : data })}
 
   
   render() {
@@ -103,10 +104,9 @@ class Add_table extends React.Component {
                             // You can store the "editor" and use when it is needed.
                             console.log( 'Editor is ready to use!', editor );
                         } }
-                        onChange={(e) => this._textUpdate(e)}
-                        
                         onChange={ ( event, editor ) => {
                             const data = editor.getData();
+                            this._textUpdate(data);
                             console.log( { event, editor, data } );
                         } }
                         onBlur={ ( event, editor ) => {
@@ -116,7 +116,7 @@ class Add_table extends React.Component {
                             console.log( 'Focus.', editor );
                         } }
                     />
-                    <Button type="submit" className={this.props.classes.Button}>
+                    <Button type="submit" variant="contained" className={this.props.classes.Button}>
                         등록
                     </Button>
                 </form>

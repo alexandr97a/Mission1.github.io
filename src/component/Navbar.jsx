@@ -5,6 +5,7 @@ import {CssBaseline,
   Link,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 const styles = theme => ({
   '@global':{
@@ -34,8 +35,10 @@ const styles = theme => ({
   },
   Link:{
     color: 'white',
-    fontSize: 20,
-    margin: theme.spacing(4),
+    fontSize: 28,
+    margin: theme.spacing(3),
+    alignItems: 'center',
+    display: 'flex',
     '&:hover': {
       textDecoration: 'none'
    },
@@ -51,8 +54,8 @@ class Navbar extends React.Component {
             <AppBar elevation={0} className={this.props.classes.AppBar}>
               <Toolbar  className={this.props.classes.toolbar}>
                 <navbar className={this.props.classes.header}>
-                  <Link variant="button" href="#" className={this.props.classes.Link} >
-                    게시판
+                  <Link variant="button" href="/" className={this.props.classes.Link} >
+                    <DashboardIcon style={{fontSize:'30px'}}/>Dashboard
                   </Link>
                 </navbar>
               </Toolbar>

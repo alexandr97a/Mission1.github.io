@@ -2,22 +2,16 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define(
         'table', 
         {
-            table_id: {
-                type: DataTypes.STRING(50),
-                allowNull: true,
-                unique: true,
-                primaryKey: true
-            },
             table_title: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(100),
                 allowNull: true
             },
             table_autor: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(100),
                 allowNull: true
             },
             table_text: {
-                type: DataTypes.STRING(250),
+                type: DataTypes.STRING(1000),
                 allowNull: true
             },
         },
