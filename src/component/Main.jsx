@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import axios from 'axios';
 import {CssBaseline, 
   Link,
@@ -32,7 +32,10 @@ const styles = theme => ({
     marginTop:"180px",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "20%"
+    marginRight: "20%",
+    [theme.breakpoints.down('sm')]:{
+      marginRight: "2.5%",
+    }
   },
   Button:{
     backgroundColor: theme.palette.primary.dark,
@@ -47,6 +50,9 @@ const styles = theme => ({
     width:"60%",
     borderRadius: "10px",
     overflow: "auto",
+    [theme.breakpoints.down('sm')]:{
+      width:"95%",
+    }
   },
   editButton:{
       backgroundColor: theme.palette.warning.light,
@@ -55,7 +61,7 @@ const styles = theme => ({
   },
   dltButton:{
     backgroundColor: theme.palette.secondary.main,
-    color:'white'
+    color:'white',
   },
   tableBody:{
     cursor: 'pointer'
@@ -152,7 +158,7 @@ class Main extends React.Component {
 
                       )
                     })
-                    : <div>데이터가 없습니다.</div>}
+                    : <Fragment>데이터가 없습니다.</Fragment>}
                   </TableBody>
                 </Table>
               </TableContainer>

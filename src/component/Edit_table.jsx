@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import axios from 'axios';
 import {CssBaseline, 
     TextField,  
@@ -27,7 +27,10 @@ const styles = theme => ({
     margin:"180px 0 10px 0",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "20%"
+    marginRight: "20%",
+    [theme.breakpoints.down('sm')]:{
+      marginRight: "2.5%"
+    }
   },
   editBtn:{
       backgroundColor: theme.palette.primary.dark,
@@ -42,6 +45,9 @@ const styles = theme => ({
       width: '60%',
       border: 'solid 1px #90a4ae',
       padding: '20px',
+      [theme.breakpoints.down('sm')]:{
+        width:"95%",
+      }
   },
   tableContent:{
       width: '60%',
@@ -49,7 +55,10 @@ const styles = theme => ({
       borderTop: 'none',
       padding: '20px',
       height:'500px',
-      overflow: "none"
+      overflow: "none",
+      [theme.breakpoints.down('sm')]:{
+        width:"95%",
+      }
   },
 });
 
@@ -94,13 +103,13 @@ class Edit_table extends React.Component {
       }
     });
   };
-  textChange = (e) => {
+  textChange = (data) => {
     console.log('asdasd',this.state.table)
     this.setState({
       ...this.state,
       table:{
         ...this.state.table,
-        table_text: e.target.value
+        table_text: data
       }
     });
   };
@@ -126,24 +135,6 @@ _save = async () => {
         return window.location.href = '/table/'+this.state.id;
     }
 }
-
-// _save = async () => {
-//     const res = await axios('/save/table_data', {
-//         method: 'POST',
-//         data: {
-//             'modify': this.state.table
-//         },
-//         headers: new Headers()
-//     })
-//     if (res.data) {
-//         alert('저장하였습니다.')
-//         return window.location.href = '/table/'+this.state.id;
-//     }
-// }
-
-
-
-
   
   render() {
 
@@ -159,17 +150,35 @@ _save = async () => {
             </Grid>
             <Grid item xs={12} className={this.props.classes.container}>
                 {table != null ?
-                          <>
+                          <Fragment>
                             <Grid item xs={12} className={this.props.classes.tableHeader}>
                                 <TextField style={{width:'100%'}} id="table_title" name="table_title" onChange={this.titleChange} value={table.table_title}/>
                                 <TextField id="table_autor" name="table_autor" onChange={this.autorChange} value={table.table_autor} style={{marginTop: '1rem'}}/>
                             </Grid>
                             <Grid item xs={12} className={this.props.classes.tableContent}>
-                                <TextField style={{width:'100%'}} id="table_text" name="table_text" onChange={this.textChange} value={table.table_text} />
+                                <CKEditor
+                                    editor={ ClassicEditor }
+                                    onReady={ editor => {
+                                        // You can store the "editor" and use when it is needed.
+                                        console.log( 'Editor is ready to use!', editor );
+                                    } }
+                                    onChange={ ( event, editor ) => {
+                                        const data = editor.getData();
+                                        this.textChange(data);
+                                        console.log( { event, editor, data } );
+                                    } }
+                                    data={table.table_text}
+                                    onBlur={ ( event, editor ) => {
+                                        console.log( 'Blur.', editor );
+                                    } }
+                                    onFocus={ ( event, editor ) => {
+                                        console.log( 'Focus.', editor );
+                                    } }
+                                />
                             </Grid>
-                          </>
+                          </Fragment>
                       
-                    : <div>데이터가 없습니다.</div>}
+                    : <Fragment>데이터가 없습니다.</Fragment>}
             </Grid>
         </React.Fragment>
       )

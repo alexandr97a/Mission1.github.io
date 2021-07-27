@@ -21,8 +21,7 @@ const styles = theme => ({
   },
   AppBar:{
     backgroundColor: theme.palette.primary.main,
-    boxShadow: 'none',
-    display: 'block'
+    boxShadow: 'none'
   },
   header:{
     display: 'flex',
@@ -32,6 +31,9 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
     margin: theme.spacing(0, 15),
+    [theme.breakpoints.down('xs')]:{
+      justifyContent: "center"
+    }
   },
   Link:{
     color: 'white',

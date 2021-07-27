@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import Main from "./component/Main.jsx"
 import Add_table from "./component/Add_table.jsx"
@@ -20,7 +20,7 @@ class App extends React.Component {
   
   render() {
       return(
-        <>
+        <Fragment>
           <Router>
             <Route path='/' exact={true} component={Main} />
               <Switch>
@@ -30,7 +30,7 @@ class App extends React.Component {
                 <Route path="/test" component={Test} />
               </Switch>
           </Router>
-        </>
+        </Fragment>
       )
   };
 };

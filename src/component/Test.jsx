@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from 'axios';
 
 
@@ -76,7 +76,7 @@ class Test extends Component {
     const { table } = this.state;
 
     return(
-      <div className='App'>
+      <Fragment className='App'>
         <h3>Hello, You are testing React!</h3>
 
         <h4> Sample1 List </h4>
@@ -84,18 +84,18 @@ class Test extends Component {
         {table.length !== 0 ? 
         table.map( (el, key) => {
           return(
-            <div key={key}>
+            <Fragment key={key}>
               <span> ID: {el.id} </span>/
               <span> NAME: {el.table_title} </span>/
               <span> EMAIL: {el.table_autor} </span>
               <button onClick={() => this._modify(el)}>modify</button>
-            </div>
+            </Fragment>
           )
         })
-        : <div>데이터가 없습니다.</div>}
+        : <Fragment>데이터가 없습니다.</Fragment>}
 		
         <button onClick={this._modifyMulti}>modify 여러개</button>
-      </div> 
+      </Fragment> 
     )
   };
 };

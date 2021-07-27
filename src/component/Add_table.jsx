@@ -33,7 +33,10 @@ const styles = theme => ({
     border: "solid 1px #90a4ae",
     borderRadius:'10px',
     width: "60%",
-    padding: theme.spacing(2, 2)
+    padding: theme.spacing(2, 2),
+    [theme.breakpoints.down('sm')]:{
+      width:"95%",
+    }
   },
   input:{
     margin: theme.spacing(1 , 0)

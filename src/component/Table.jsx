@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import axios from 'axios';
 import {CssBaseline, 
     Typography ,  
@@ -25,7 +25,10 @@ const styles = theme => ({
     margin:"180px 0 10px 0",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "20%"
+    marginRight: "20%",
+    [theme.breakpoints.down('sm')]:{
+      marginRight: "2.5%",
+    }
   },
   editBtn:{
       backgroundColor: theme.palette.primary.dark,
@@ -40,13 +43,19 @@ const styles = theme => ({
       width: '60%',
       border: 'solid 1px #90a4ae',
       padding: '20px',
+      [theme.breakpoints.down('sm')]:{
+        width:"95%",
+      }
   },
   tableContent:{
       width: '60%',
       border: 'solid 1px #90a4ae',
       borderTop: 'none',
       padding: '20px',
-      height:'500px'
+      height:'500px',
+      [theme.breakpoints.down('sm')]:{
+        width:"95%",
+      }
   },
 });
 
@@ -89,7 +98,7 @@ class Table extends React.Component {
             </Grid>
             <Grid item xs={12} className={this.props.classes.container}>
                 {table != null ?
-                          <>
+                          <Fragment>
                             <Grid item xs={12} className={this.props.classes.tableHeader}>
                                 <Typography variant="h4" >{table.table_title} </Typography >
                                 <Typography style={{marginTop: '1rem'}} variant="body1" >{table.table_autor} | <Moment format="YYYY-MM-DD" date={table.createdAt}/> </Typography >
@@ -97,9 +106,9 @@ class Table extends React.Component {
                             <Grid item xs={12} className={this.props.classes.tableContent}>
                                 <Typography >{table.table_text}</Typography >
                             </Grid>
-                          </>
+                          </Fragment>
                       
-                    : <div>데이터가 없습니다.</div>}
+                    : <Fragment>데이터가 없습니다.</Fragment>}
             </Grid>
         </React.Fragment>
       )
