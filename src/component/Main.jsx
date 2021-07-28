@@ -16,10 +16,11 @@ import CreateIcon from '@material-ui/icons/Create';
 import Navbar from "./Navbar.jsx";
 import Moment from 'react-moment';
 
+
 const styles = theme => ({
   '@global':{
     html:{
-      margin: 0,
+      margin: 'margin: 0 auto !important; ',
       padding: 0,
     },
     ul: {
@@ -28,12 +29,16 @@ const styles = theme => ({
       listStyle: 'none',
     },
   },
+  container:{
+    maxWidth:"1600px",
+    margin: ' 0 auto;'
+  },
   addButton:{
     marginTop:"180px",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "20%",
     [theme.breakpoints.down('sm')]:{
+      marginTop:"110px",
       marginRight: "2.5%",
     }
   },
@@ -44,27 +49,29 @@ const styles = theme => ({
     marginTop:"10px",
     display: "flex",
     justifyContent:"center",
-    height: "1000px"
-  },
-  tableCont:{
-    width:"60%",
+    height: "80vh",
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
     borderRadius: "10px",
-    overflow: "auto",
     [theme.breakpoints.down('sm')]:{
-      width:"95%"
+      height: "75vh",
+      width:"95%",
+      margin: ' 0 auto;',
+      marginTop:"10px",
     }
-  },
-  editButton:{
-      backgroundColor: theme.palette.warning.light,
-      marginRight: '0.1rem',
-      color:'white'
   },
   dltButton:{
     backgroundColor: theme.palette.secondary.main,
     color:'white',
   },
   tableBody:{
-    cursor: 'pointer'
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    wordBreak: "break-all",
+    textOverflow: 'ellipsis',
+    [theme.breakpoints.down('sm')]:{
+      maxWidth: '5rem',
+    }
   }
 });
 
@@ -113,55 +120,56 @@ class Main extends React.Component {
         <React.Fragment>
           <CssBaseline />
             <Navbar/>
-            <Grid item xs={12} className={this.props.classes.addButton}>
-                <Link href="/add_table">
-                    <Button variant="contained"  size="large" color="primary" className={this.props.classes.Button}>
-                        <CreateIcon fontSize="small" />&nbsp;글쓰기
-                    </Button>
-                </Link>
-            </Grid>
-            <Grid item xs={12} className={this.props.classes.main}>
-              <TableContainer component={Paper} className={this.props.classes.tableCont}>
-                <Table className={this.props.classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='center'>번호</TableCell>
-                      <TableCell align='left'>제목</TableCell>
-                      <TableCell align='left'>글쓴이</TableCell>
-                      <TableCell align='left'>등록일</TableCell>
-                      <TableCell align='center'>기능</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                  {table.length !== 0 ? 
-                    table.map( (el, key) => {
-                      const view_url = 'table/'+el.id;
-                      const link = () =>{
-                        return window.location.href=view_url;
-                      }
-                      // const edit_view_url = 'edit_table/'+el.id;
-                      // const editlink = () =>{
-                      //   return window.location.href=edit_view_url;
-                      // }
-                      // console.log('el',el)
-                      return(
-                          <TableRow key={key}>
-                            <TableCell  align='center' onClick={link} className={this.props.classes.tableBody}>{el.id}</TableCell>
-                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_title}</TableCell>
-                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_autor}</TableCell>
-                            <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}><Moment format="YYYY-MM-DD" date={el.createdAt}/></TableCell>
-                            <TableCell  align='center'>
-                              {/* <Button className={this.props.classes.editButton} onClick={editlink}>Edit</Button> */}
-                              <Button className={this.props.classes.dltButton} onClick={() => this._delete(el)}>Delete</Button>
-                            </TableCell>
-                          </TableRow>
+            <Grid item xs={12} className={this.props.classes.container}>
+              <Grid item xs={12} className={this.props.classes.addButton}>
+                  <Link href="/add_table">
+                      <Button variant="contained"  size="large" color="primary" className={this.props.classes.Button}>
+                          <CreateIcon fontSize="small" />&nbsp;글쓰기
+                      </Button>
+                  </Link>
+              </Grid>
+              <Grid item xs={12} className={this.props.classes.main}>
+                <TableContainer component={Paper} className={this.props.classes.tableCont}>
+                  <Table className={this.props.classes.table} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align='center'>번호</TableCell>
+                        <TableCell align='left'>제목</TableCell>
+                        <TableCell align='left'>글쓴이</TableCell>
+                        <TableCell align='left'>등록일</TableCell>
+                        <TableCell align='center'>기능</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {table.length !== 0 ? 
+                      table.map( (el, key) => {
+                        const view_url = 'table/'+el.id;
+                        const link = () =>{
+                          return window.location.href=view_url;
+                        }
+                        // const edit_view_url = 'edit_table/'+el.id;
+                        // const editlink = () =>{
+                        //   return window.location.href=edit_view_url;
+                        // }
+                        // console.log('el',el)
+                        return(
+                            <TableRow key={key}>
+                              <TableCell  align='center' onClick={link} className={this.props.classes.tableBody}>{el.id}</TableCell>
+                              <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_title}</TableCell>
+                              <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_autor}</TableCell>
+                              <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}><Moment format="YYYY-MM-DD" date={el.createdAt}/></TableCell>
+                              <TableCell  align='center'>
+                                <Button className={this.props.classes.dltButton} onClick={() => this._delete(el)}>Delete</Button>
+                              </TableCell>
+                            </TableRow>
 
-                      )
-                    })
-                    : <Fragment>데이터가 없습니다.</Fragment>}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                        )
+                      })
+                      : <Fragment>데이터가 없습니다.</Fragment>}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
             </Grid>
         </React.Fragment>
       )

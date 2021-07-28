@@ -23,23 +23,30 @@ const styles = theme => ({
     },
   },
   container:{
+      margin: ' 0 auto;',
       marginTop: "230px",
-      display: "flex",
-      justifyContent: "center",
+      maxWidth:"1600px",
+      [theme.breakpoints.down('sm')]:{
+        marginTop: "110px",
+      }
   },
   box:{
     display: "flex",
     flexDirection: "column",
+    backgroundColor:'white',
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
     border: "solid 1px #90a4ae",
+    
     borderRadius:'10px',
-    width: "60%",
     padding: theme.spacing(2, 2),
     [theme.breakpoints.down('sm')]:{
+      margin: ' 0 auto;',
       width:"95%",
+      border: "none",
     }
   },
   input:{
-    margin: theme.spacing(1 , 0)
+    margin: theme.spacing(1 , 0),
   },
   editor:{
     margin: theme.spacing(1 , 0)

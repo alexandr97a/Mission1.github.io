@@ -1,10 +1,9 @@
 .ck-editor__editable {
   min-height: 50vh;
-  max-width: 100%;
 }
 
 @media screen and (max-width: 980px) {
   .ck-editor__editable {
-    min-height: 30vh;
+    min-height: 45vh;
   }
 }

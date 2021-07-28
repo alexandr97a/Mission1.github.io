@@ -23,41 +23,54 @@ const styles = theme => ({
       listStyle: 'none',
     },
   },
+  container:{
+    maxWidth:"1600px",
+    margin: ' 0 auto;',
+  },
   addButton:{
     margin:"180px 0 10px 0",
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: "20%",
     [theme.breakpoints.down('sm')]:{
-      marginRight: "2.5%"
+      marginTop:"110px",
+      marginRight: "2.5%",
     }
   },
   editBtn:{
       backgroundColor: theme.palette.primary.dark,
       color: 'white',
   },
-  container:{
+  main:{
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor:'white',
+    borderRadius: "10px",
+    border: 'solid 1px #90a4ae',
+    boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
+    [theme.breakpoints.down('sm')]:{
+      width:"95%",
+      margin: ' 0 auto;'
+    }
   },
   tableHeader:{
-      width: '60%',
-      border: 'solid 1px #90a4ae',
+      width: '100%',
+      borderBottom: 'solid 1px #90a4ae',
       padding: '20px',
       [theme.breakpoints.down('sm')]:{
         width:"95%",
+        border: 'none',
       }
   },
   tableContent:{
-      width: '60%',
-      border: 'solid 1px #90a4ae',
+      width: '100%',
       borderTop: 'none',
       padding: '20px',
       height:'500px',
       overflow: "none",
       [theme.breakpoints.down('sm')]:{
         width:"95%",
+        border: 'none',
       }
   },
 });
@@ -143,42 +156,44 @@ _save = async () => {
         <React.Fragment>
           <CssBaseline />
             <Navbar/>
-            <Grid item xs={12} className={this.props.classes.addButton}>
-                <Button variant="contained"  size="large" className={this.props.classes.editBtn} onClick={()=>this._save() }>
-                    완료
-                </Button>
-            </Grid>
             <Grid item xs={12} className={this.props.classes.container}>
-                {table != null ?
-                          <Fragment>
-                            <Grid item xs={12} className={this.props.classes.tableHeader}>
-                                <TextField style={{width:'100%'}} id="table_title" name="table_title" onChange={this.titleChange} value={table.table_title}/>
-                                <TextField id="table_autor" name="table_autor" onChange={this.autorChange} value={table.table_autor} style={{marginTop: '1rem'}}/>
-                            </Grid>
-                            <Grid item xs={12} className={this.props.classes.tableContent}>
-                                <CKEditor
-                                    editor={ ClassicEditor }
-                                    onReady={ editor => {
-                                        // You can store the "editor" and use when it is needed.
-                                        console.log( 'Editor is ready to use!', editor );
-                                    } }
-                                    onChange={ ( event, editor ) => {
-                                        const data = editor.getData();
-                                        this.textChange(data);
-                                        console.log( { event, editor, data } );
-                                    } }
-                                    data={table.table_text}
-                                    onBlur={ ( event, editor ) => {
-                                        console.log( 'Blur.', editor );
-                                    } }
-                                    onFocus={ ( event, editor ) => {
-                                        console.log( 'Focus.', editor );
-                                    } }
-                                />
-                            </Grid>
-                          </Fragment>
-                      
-                    : <Fragment>데이터가 없습니다.</Fragment>}
+              <Grid item xs={12} className={this.props.classes.addButton}>
+                  <Button variant="contained"  size="large" className={this.props.classes.editBtn} onClick={()=>this._save() }>
+                      완료
+                  </Button>
+              </Grid>
+              <Grid item xs={12} className={this.props.classes.main}>
+                  {table != null ?
+                            <Fragment>
+                              <Grid item xs={12} className={this.props.classes.tableHeader}>
+                                  <TextField style={{width:'100%'}} id="table_title" name="table_title" onChange={this.titleChange} value={table.table_title}/>
+                                  <TextField id="table_autor" name="table_autor" onChange={this.autorChange} value={table.table_autor} style={{marginTop: '1rem'}}/>
+                              </Grid>
+                              <Grid item xs={12} className={this.props.classes.tableContent}>
+                                  <CKEditor
+                                      editor={ ClassicEditor }
+                                      onReady={ editor => {
+                                          // You can store the "editor" and use when it is needed.
+                                          console.log( 'Editor is ready to use!', editor );
+                                      } }
+                                      onChange={ ( event, editor ) => {
+                                          const data = editor.getData();
+                                          this.textChange(data);
+                                          console.log( { event, editor, data } );
+                                      } }
+                                      data={table.table_text}
+                                      onBlur={ ( event, editor ) => {
+                                          console.log( 'Blur.', editor );
+                                      } }
+                                      onFocus={ ( event, editor ) => {
+                                          console.log( 'Focus.', editor );
+                                      } }
+                                  />
+                              </Grid>
+                            </Fragment>
+                        
+                      : <Fragment>데이터가 없습니다.</Fragment>}
+              </Grid>
             </Grid>
         </React.Fragment>
       )
