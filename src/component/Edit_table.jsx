@@ -14,8 +14,9 @@ import Moment from 'react-moment';
 const styles = theme => ({
   '@global':{
     html:{
-      margin: 0,
+      margin: '0 auto',
       padding: 0,
+      maxWidth:"1600px",
     },
     ul: {
       margin: 0,
@@ -24,7 +25,7 @@ const styles = theme => ({
     },
   },
   container:{
-    maxWidth:"1600px",
+    width: "calc( 100% - 100px)",
     margin: ' 0 auto;',
   },
   addButton:{
@@ -49,7 +50,7 @@ const styles = theme => ({
     border: 'solid 1px #90a4ae',
     boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
     [theme.breakpoints.down('sm')]:{
-      width:"95%",
+      // width:"95%",
       margin: ' 0 auto;'
     }
   },

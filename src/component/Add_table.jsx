@@ -13,8 +13,9 @@ import '../App.css';
 const styles = theme => ({
   '@global':{
     html:{
-      margin: 0,
+      margin: '0 auto',
       padding: 0,
+      maxWidth:"1600px",
     },
     ul: {
       margin: 0,
@@ -23,12 +24,9 @@ const styles = theme => ({
     },
   },
   container:{
+      width: "calc( 100% - 100px)",
       margin: ' 0 auto;',
       marginTop: "230px",
-      maxWidth:"1600px",
-      [theme.breakpoints.down('sm')]:{
-        marginTop: "110px",
-      }
   },
   box:{
     display: "flex",
