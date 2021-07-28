@@ -51,7 +51,7 @@ const styles = theme => ({
     borderRadius: "10px",
     overflow: "auto",
     [theme.breakpoints.down('sm')]:{
-      width:"95%",
+      width:"95%"
     }
   },
   editButton:{

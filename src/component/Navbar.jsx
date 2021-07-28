@@ -31,7 +31,7 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
     margin: theme.spacing(0, 15),
-    [theme.breakpoints.down('xs')]:{
+    [theme.breakpoints.down('sm')]:{
       justifyContent: "center"
     }
   },
