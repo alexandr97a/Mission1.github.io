@@ -24,9 +24,11 @@ const styles = theme => ({
     },
   },
   container:{
-      width: "calc( 100% - 100px)",
-      margin: ' 0 auto;',
-      marginTop: "230px",
+    width: "calc( 100% - 100px)",
+    margin: ' 0 auto',
+    maxWidth: "1600px",
+    minWidth: "1000px",
+    marginTop: "230px",
   },
   box:{
     display: "flex",

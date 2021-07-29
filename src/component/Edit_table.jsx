@@ -26,7 +26,9 @@ const styles = theme => ({
   },
   container:{
     width: "calc( 100% - 100px)",
-    margin: ' 0 auto;',
+    margin: ' 0 auto',
+    maxWidth: "1600px",
+    minWidth: "1000px",
   },
   addButton:{
     margin:"180px 0 10px 0",

@@ -11,11 +11,20 @@ import {CssBaseline,
   TableRow, 
   TableBody,
   Button} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createTheme} from '@material-ui/core/styles';
 import CreateIcon from '@material-ui/icons/Create';
 import Navbar from "./Navbar.jsx";
 import Moment from 'react-moment';
 
+const mediaQ = createTheme({
+  breakpoints: {
+    values: {
+      a: 480,
+      b: 768,
+      c: 999,
+    },
+  },
+})
 
 const styles = theme => ({
   '@global':{
@@ -32,12 +41,14 @@ const styles = theme => ({
   container:{
     width: "calc( 100% - 100px)",
     margin: ' 0 auto',
+    maxWidth: "1600px",
+    minWidth: "1000px",
   },
   addButton:{
     marginTop:"180px",
     display: "flex",
     justifyContent: "flex-end",
-    [theme.breakpoints.down('sm')]:{
+    [mediaQ.breakpoints.down('a')]:{
       marginTop:"110px",
       // marginRight: "2.5%",
     }
@@ -46,15 +57,13 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.dark,
   },
   main:{
-    maxWidth: "1000px",
-    minWidth: "1000px",
     marginTop:"10px",
     display: "flex",
     justifyContent:"center",
     height: "80vh",
     boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;",
     borderRadius: "10px",
-    [theme.breakpoints.down('sm')]:{
+    [theme.breakpoints.down('a')]:{
       height: "75vh",
       // width:"95%",
       margin: ' 0 auto;',
@@ -71,7 +80,7 @@ const styles = theme => ({
     overflow: 'hidden',
     wordBreak: "break-all",
     textOverflow: 'ellipsis',
-    [theme.breakpoints.down('sm')]:{
+    [theme.breakpoints.down('a')]:{
       maxWidth: '5rem',
     }
   }
@@ -116,13 +125,10 @@ class Main extends React.Component {
   
   render() {
     const { table } = this.state;
-    
-    console.log('table',table)
       return(
         <React.Fragment>
           <CssBaseline />
             <Navbar/>
-            <Grid item xs={12} style={{maxWidth:"1600px",margin:'auto'}}>
               <Grid item xs={12} className={this.props.classes.container}>
                 <Grid item xs={12} className={this.props.classes.addButton}>
                     <Link href="/add_table">
@@ -174,7 +180,6 @@ class Main extends React.Component {
                   </TableContainer>
                 </Grid>
               </Grid>
-            </Grid>
         </React.Fragment>
       )
   };
