@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 const {
     Customer,
     Table,
+    Coment,
     Sequelize: { Op }
   } = require('./models');
 sequelize.query('SET NAMES utf8;');
@@ -45,7 +46,7 @@ app.get('/get/table', (req, res) => {
 
      Table.findOne({
          where:{
-             id:req.params.id
+             table_id:req.params.id
          }
      })
      .then( result => { res.send(result) })
@@ -54,25 +55,11 @@ app.get('/get/table', (req, res) => {
 
  app.post('/delete/table', (req, res) => {
     Table.destroy({
-        where : { id : req.body.delete.id }
+        where : { table_id : req.body.delete.id }
     })
     .then( res.sendStatus(200) )
     .catch( err => { throw err })
 })
-
-// app.post("/save/table_data",(req,res)=>{
-//     Table.update({
-//         table_title: req.body.modify.table_title,
-//         table_autor: req.body.modify.table_autor,
-//         table_text: req.body.modify.table_text
-//     },{
-//         where:{
-//             id: req.body.modify.id
-//         }
-// })
-// .then( result => { res.send(result) })
-// .catch( err => { throw err })
-// })
 
 app.post("/save/table_data",(req,res)=>{
 
@@ -90,20 +77,44 @@ app.post("/save/table_data",(req,res)=>{
             console.log('3',tAutor)
             console.log('4',tText)
 
-
-
             Table.update({
                 table_title: tTitle,
                 table_autor: tAutor,
                 table_text: tText
             },{
                 where:{
-                    id: req.body.modify.id
+                    table_id: req.body.modify.id
                 }
         })
     .then( result => { res.send(result) })
     .catch( err => { throw err })
 })
+
+app.post('/add/coment', (req, res) => {
+    Coment.create({
+        coment_autor : req.body.coment_autor,
+        coment_text : req.body.coment_text,
+        tableTableId: req.body.table_id,
+    })
+    .then( result => {
+        res.send(result)
+    })
+    .catch( err => {
+        console.log(err)
+        throw err;
+    })
+})
+
+app.get('/get/coment/:id', (req, res) => {
+    console.log('req.params.id  ',req.params.id  )
+    Coment.findAll({
+        where: {
+            tableTableId: req.params.id  
+          }
+            })
+     .then( result => { res.send(result) })
+     .catch( err => { throw err })
+ }) 
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

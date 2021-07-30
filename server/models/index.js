@@ -33,6 +33,10 @@ let sequelize = new Sequelize(
 
     db.Customer = require('./customer')(sequelize, Sequelize);
     db.Table = require('./table')(sequelize, Sequelize);
+    db.Coment = require('./coment')(sequelize, Sequelize);
+
+    db.Table.hasMany(db.Coment,{as: "coment"});
+    db.Coment.belongsTo(db.Table,{as: 'table'});
 
 
 db.secret = '(9*)5$&!3%^0%^@@2$1!#5@2!4';

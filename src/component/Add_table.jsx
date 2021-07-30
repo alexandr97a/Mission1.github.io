@@ -106,8 +106,8 @@ class Add_table extends React.Component {
             <Navbar/>
             <Grid item xs={12} className={this.props.classes.container}>
                 <form className={this.props.classes.box}  onSubmit={this._addTable}>
-                    <TextField label="글제목" variant="outlined" className={this.props.classes.input} onChange={(e) => this._titleUpdate(e)}></TextField>
-                    <TextField label="글쓴이" variant="outlined" className={this.props.classes.input} onChange={(e) => this._autorUpdate(e)}></TextField>
+                    <TextField label="글제목" variant="outlined" className={this.props.classes.input} onChange={(e) => this._titleUpdate(e)}/>
+                    <TextField label="글쓴이" variant="outlined" className={this.props.classes.input} onChange={(e) => this._autorUpdate(e)}/>
                     <CKEditor
                         editor={ ClassicEditor }
                         onReady={ editor => {

@@ -1,23 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define(
-        'table', 
+        'coment', 
         {
-            table_id:{
+            coment_id:{
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 unique: true,
                 autoIncrement: true,
                 primaryKey: true
             },
-            table_title: {
+            coment_autor: {
                 type: DataTypes.STRING(100),
                 allowNull: true
             },
-            table_autor: {
-                type: DataTypes.STRING(100),
-                allowNull: true
-            },
-            table_text: {
+            coment_text: {
                 type: DataTypes.STRING(1000),
                 allowNull: true
             },

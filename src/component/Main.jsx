@@ -109,7 +109,7 @@ class Main extends React.Component {
     const remove = window.confirm(el.table_title + '을 삭제하시겠습니까?');
 
     if(remove) {
-      const target = { id : el.id }
+      const target = { id : el.table_id }
       const res = await axios('/delete/table', {
         method : 'POST',
         data : { 'delete' : target },
@@ -152,7 +152,7 @@ class Main extends React.Component {
                       <TableBody>
                       {table.length !== 0 ? 
                         table.map( (el, key) => {
-                          const view_url = 'table/'+el.id;
+                          const view_url = 'table/'+el.table_id;
                           const link = () =>{
                             return window.location.href=view_url;
                           }
@@ -163,7 +163,7 @@ class Main extends React.Component {
                           // console.log('el',el)
                           return(
                               <TableRow key={key}>
-                                <TableCell  align='center' onClick={link} className={this.props.classes.tableBody}>{el.id}</TableCell>
+                                <TableCell  align='center' onClick={link} className={this.props.classes.tableBody}>{el.table_id}</TableCell>
                                 <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_title}</TableCell>
                                 <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_autor}</TableCell>
                                 <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}><Moment format="YYYY-MM-DD" date={el.createdAt}/></TableCell>
