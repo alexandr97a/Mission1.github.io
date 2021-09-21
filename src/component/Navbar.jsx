@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   AppBar:{
     backgroundColor: theme.palette.primary.main,
-    boxShadow: 'none'
+    boxShadow: 'none',
   },
   header:{
     display: 'flex',

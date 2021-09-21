@@ -71,8 +71,6 @@ const styles = theme => ({
     }
   },
   dltButton:{
-    backgroundColor: theme.palette.secondary.main,
-    color:'white',
   },
   tableBody:{
     cursor: 'pointer',
@@ -132,7 +130,7 @@ class Main extends React.Component {
               <Grid item xs={12} className={this.props.classes.container}>
                 <Grid item xs={12} className={this.props.classes.addButton}>
                     <Link href="/add_table">
-                        <Button variant="contained"  size="large" color="primary" className={this.props.classes.Button}>
+                        <Button size="large" variant="contained" color="primary" className={this.props.classes.Button}>
                             <CreateIcon fontSize="small" />&nbsp;글쓰기
                         </Button>
                     </Link>
@@ -168,7 +166,7 @@ class Main extends React.Component {
                                 <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}>{el.table_autor}</TableCell>
                                 <TableCell  align='left' onClick={link} className={this.props.classes.tableBody}><Moment format="YYYY-MM-DD" date={el.createdAt}/></TableCell>
                                 <TableCell  align='center'>
-                                  <Button className={this.props.classes.dltButton} onClick={() => this._delete(el)}>Delete</Button>
+                                  <Button className={this.props.classes.dltButton} color="secondary" variant="contained" onClick={() => this._delete(el)}>Delete</Button>
                                 </TableCell>
                               </TableRow>
 

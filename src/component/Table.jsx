@@ -40,10 +40,10 @@ const styles = theme => ({
       marginRight: "2.5%",
     }
   },
-  editBtn:{
-      backgroundColor: theme.palette.primary.dark,
-      color: 'white',
-  },
+  // editBtn:{
+  //     backgroundColor: theme.palette.primary.dark,
+  //     color: 'white',
+  // },
   contentMain:{
     display: "flex",
     flexDirection: "column",
@@ -187,7 +187,7 @@ class Table extends React.Component {
             
             <Grid item xs={12} className={this.props.classes.container}>
               <Grid item xs={12} className={this.props.classes.addButton}>
-                <Button variant="contained"  size="large" onClick={() => this.editlink()} className={this.props.classes.editBtn}>
+                <Button variant="contained" color="primary" size="large" onClick={() => this.editlink()} className={this.props.classes.editBtn}>
                     수정
                 </Button>
               </Grid>
